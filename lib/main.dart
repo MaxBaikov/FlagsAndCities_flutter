@@ -31,9 +31,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
 
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 24);
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static final  List<Widget> _widgetOptions = <Widget>[
     FlagsWidget(optionStyle: optionStyle),
     CountriesWidget(optionStyle: optionStyle),
     CityWidget(optionStyle: optionStyle),
@@ -61,7 +61,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
               label: "Countries", icon: Icon(Icons.language)),
           BottomNavigationBarItem(
-              label: "City", icon: Icon(Icons.location_city)),
+              label: "Capital", icon: Icon(Icons.location_city)),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.deepPurple,
