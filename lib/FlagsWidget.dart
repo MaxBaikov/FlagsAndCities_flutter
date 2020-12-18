@@ -3,6 +3,7 @@ import 'dart:math';
 
 import './RadioButtons.dart';
 import './Data.dart';
+import 'Data.dart';
 
 class FlagsWidget extends StatefulWidget {
   final TextStyle optionStyle;
@@ -17,16 +18,19 @@ class FlagsWidget extends StatefulWidget {
 }
 
 class _FlagsWidgetState extends State<FlagsWidget> {
-
   static const numberOfAnswers = 3;
-  List<Entry> currentGuessList;
+  var currentGuessList = List<Entry>(numberOfAnswers);
   var rightAnswer;
 
-  //TODO заполнить currentGuessList и rightAnswer (сейчас null)
+  @override
+  void initState() {
+    super.initState();
+    generateNewGuessList();
+    generateRightAnswer();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,19 +79,22 @@ class _FlagsWidgetState extends State<FlagsWidget> {
     );
   }
 
-  checkAnswer() {
-
-  }
+  checkAnswer() {}
 
   generateNewGuessList() {
-    //TODO добавить проверку на совпадение
-    for (int i = 0; i < numberOfAnswers; i++) {
-      currentGuessList.add(Countries()
-          .countries[Random().nextInt(Countries().countries.length)]);
+    // currentGuessList.clear();
+    int i = 0;
+    while (i < numberOfAnswers) {
+      var next =
+          Countries().countries[Random().nextInt(Countries().countries.length)];
+      if (currentGuessList.contains(next)) continue;
+      currentGuessList[i] = next;
+      i++;
     }
   }
 
   generateRightAnswer() {
     rightAnswer = Random().nextInt((currentGuessList.length));
+    // print("answer");
   }
 }
