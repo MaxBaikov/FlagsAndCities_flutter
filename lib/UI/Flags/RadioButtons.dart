@@ -3,8 +3,15 @@ import 'package:flutter_app/Model/Data.dart';
 
 class RadioButtons extends StatefulWidget {
   final List<Entry> currentGuessList;
+  var answer;
+  Function(String) setAnswer;
 
-  RadioButtons({Key key, @required this.currentGuessList}) : super(key: key);
+  RadioButtons(
+      {Key key,
+      @required this.currentGuessList,
+      @required this.answer,
+      @required this.setAnswer})
+      : super(key: key);
 
   @override
   RadioButtonsState createState() => RadioButtonsState();
@@ -24,6 +31,7 @@ class RadioButtonsState extends State<RadioButtons> {
           title: Text(widget.currentGuessList[0].country),
           value: widget.currentGuessList[0].country,
           onChanged: (val) {
+            widget.setAnswer(widget.currentGuessList[0].country);
             setState(() {
               radioItem = val;
             });
@@ -35,6 +43,7 @@ class RadioButtonsState extends State<RadioButtons> {
           title: Text(widget.currentGuessList[1].country),
           value: widget.currentGuessList[1].country,
           onChanged: (val) {
+            widget.setAnswer(widget.currentGuessList[1].country);
             setState(() {
               radioItem = val;
             });
@@ -46,6 +55,7 @@ class RadioButtonsState extends State<RadioButtons> {
           title: Text(widget.currentGuessList[2].country),
           value: widget.currentGuessList[2].country,
           onChanged: (val) {
+            widget.setAnswer(widget.currentGuessList[2].country);
             setState(() {
               radioItem = val;
             });

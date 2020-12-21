@@ -60,7 +60,10 @@ class _FlagsWidgetState extends State<FlagsWidget> {
               ),
             ),
             Container(
-              child: RadioButtons(currentGuessList: currentGuessList),
+              child: RadioButtons(
+                  currentGuessList: currentGuessList,
+                  answer: answer,
+                  setAnswer: setAnswer),
             ),
             Container(
               child: RaisedButton(
@@ -78,13 +81,11 @@ class _FlagsWidgetState extends State<FlagsWidget> {
     );
   }
 
-  //TODO передать состояние радиобаттон сюда
   checkAnswer() {
     var val;
-    var a = RadioButtonsState().radioItem;
+    var a = answer;
     var b = currentGuessList[rightAnswer].country;
-    if (RadioButtonsState().radioItem ==
-        currentGuessList[rightAnswer].country) {
+    if (answer == currentGuessList[rightAnswer].country) {
       val = 'ПРАВИЛЬНО';
     } else {
       val = 'НЕ ПРАВИЛЬНО';
@@ -95,7 +96,9 @@ class _FlagsWidgetState extends State<FlagsWidget> {
   }
 
   setAnswer(String answer) {
-    this.answer = answer;
+    setState(() {
+      this.answer = answer;
+    });
   }
 
 //TODO проверить - генерит повторяющиеся элементы
