@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Data.dart';
+import 'package:flutter_app/Model/Data.dart';
 
 class RadioButtons extends StatefulWidget {
   final List<Entry> currentGuessList;
@@ -22,7 +22,7 @@ class RadioButtonsState extends State<RadioButtons> {
           contentPadding: EdgeInsets.symmetric(horizontal: 100.0),
           groupValue: radioItem,
           title: Text(widget.currentGuessList[0].country),
-          value: 'Item 1',
+          value: widget.currentGuessList[0].country,
           onChanged: (val) {
             setState(() {
               radioItem = val;
@@ -32,8 +32,8 @@ class RadioButtonsState extends State<RadioButtons> {
         RadioListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 100.0),
           groupValue: radioItem,
-          title: Text('Radio Button Item 2'),
-          value: 'Item 2',
+          title: Text(widget.currentGuessList[1].country),
+          value: widget.currentGuessList[1].country,
           onChanged: (val) {
             setState(() {
               radioItem = val;
@@ -43,8 +43,8 @@ class RadioButtonsState extends State<RadioButtons> {
         RadioListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 100.0),
           groupValue: radioItem,
-          title: Text('Radio Button Item 3'),
-          value: 'Item 3',
+          title: Text(widget.currentGuessList[2].country),
+          value: widget.currentGuessList[2].country,
           onChanged: (val) {
             setState(() {
               radioItem = val;

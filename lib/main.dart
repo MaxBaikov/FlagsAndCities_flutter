@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'CityWidget.dart';
-import 'CountriesWidget.dart';
-import 'FlagsWidget.dart';
+import 'UI/Capital/CapralWidget.dart';
+import 'UI/Countries/CountriesWidget.dart';
+import 'UI/Flags/FlagsWidget.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,13 +27,11 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-
   int _selectedIndex = 0;
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 24);
+  static const TextStyle optionStyle = TextStyle(fontSize: 24);
 
-  static final  List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     FlagsWidget(optionStyle: optionStyle),
     CountriesWidget(optionStyle: optionStyle),
     CityWidget(optionStyle: optionStyle),
@@ -70,8 +68,3 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 }
-
-
-
-
-

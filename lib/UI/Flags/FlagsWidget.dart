@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import './RadioButtons.dart';
-import './Data.dart';
-import 'Data.dart';
+import 'RadioButtons.dart';
+import '../../Model/Data.dart';
 
 class FlagsWidget extends StatefulWidget {
   final TextStyle optionStyle;
@@ -21,6 +21,8 @@ class _FlagsWidgetState extends State<FlagsWidget> {
   static const numberOfAnswers = 3;
   var currentGuessList = List<Entry>(numberOfAnswers);
   var rightAnswer;
+  var answer;
+  var check;
 
   @override
   void initState() {
@@ -36,24 +38,18 @@ class _FlagsWidgetState extends State<FlagsWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                padding: EdgeInsets.all(70),
                 width: 300,
                 height: 200,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: Image.network(
-                                'https://flutter.su/data/4e405c78a41d983fe87757c0c7e3885b.jpg')
-                            .image,
-                        fit: BoxFit.cover),
-                    // shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black54,
-                        blurRadius: 5.0,
-                        spreadRadius: 5.0,
-                        offset: Offset(5, 8),
-                      )
-                    ] //boxShadow
+                child:
+                    SvgPicture.network(currentGuessList[rightAnswer].flagURL),
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    blurRadius: 5.0,
+                    spreadRadius: 5.0,
+                    offset: Offset(5, 8),
+                  )
+                ] //boxShadow
                     ) //BoxDecoration
                 ),
             Container(
@@ -64,7 +60,6 @@ class _FlagsWidgetState extends State<FlagsWidget> {
               ),
             ),
             Container(
-              //TODO заменить на radiobuttons и добавить кнопку ответить (сюда передавать параметры 3 ответа и url флага)
               child: RadioButtons(currentGuessList: currentGuessList),
             ),
             Container(
@@ -72,15 +67,38 @@ class _FlagsWidgetState extends State<FlagsWidget> {
                 color: Colors.blue,
                 textColor: Colors.white,
                 child: Text("ответить"),
-                onPressed: checkAnswer(),
+                onPressed: checkAnswer,
               ),
             ),
+            Text(
+              '$check',
+              style: TextStyle(fontSize: 23),
+            )
           ]),
     );
   }
 
-  checkAnswer() {}
+  //TODO передать состояние радиобаттон сюда
+  checkAnswer() {
+    var val;
+    var a = RadioButtonsState().radioItem;
+    var b = currentGuessList[rightAnswer].country;
+    if (RadioButtonsState().radioItem ==
+        currentGuessList[rightAnswer].country) {
+      val = 'ПРАВИЛЬНО';
+    } else {
+      val = 'НЕ ПРАВИЛЬНО';
+    }
+    setState(() {
+      check = val;
+    });
+  }
 
+  setAnswer(String answer) {
+    this.answer = answer;
+  }
+
+//TODO проверить - генерит повторяющиеся элементы
   generateNewGuessList() {
     // currentGuessList.clear();
     int i = 0;
