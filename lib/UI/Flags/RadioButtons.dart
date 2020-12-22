@@ -18,7 +18,7 @@ class RadioButtons extends StatefulWidget {
 }
 
 class RadioButtonsState extends State<RadioButtons> {
-  String radioItem = '';
+  // String radioItem = '';
 
   //TODO  вынести виджеты к отдельны класс и передавать им названия радиобаттомов, и функцию обновления выбранного значения в FlagsWdget
   @override
@@ -27,44 +27,44 @@ class RadioButtonsState extends State<RadioButtons> {
       children: <Widget>[
         RadioListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 100.0),
-          groupValue: radioItem,
+          groupValue: widget.answer,
           title: Text(widget.currentGuessList[0].country),
           value: widget.currentGuessList[0].country,
           onChanged: (val) {
             widget.setAnswer(widget.currentGuessList[0].country);
-            setState(() {
-              radioItem = val;
-            });
+            // setState(() {
+            //   radioItem = val;
+            // });
           },
         ),
         RadioListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 100.0),
-          groupValue: radioItem,
+          groupValue: widget.answer,
           title: Text(widget.currentGuessList[1].country),
           value: widget.currentGuessList[1].country,
           onChanged: (val) {
             widget.setAnswer(widget.currentGuessList[1].country);
-            setState(() {
-              radioItem = val;
-            });
+            // setState(() {
+            //   radioItem = val;
+            // });
           },
         ),
         RadioListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 100.0),
-          groupValue: radioItem,
+          groupValue: widget.answer,
           title: Text(widget.currentGuessList[2].country),
           value: widget.currentGuessList[2].country,
           onChanged: (val) {
             widget.setAnswer(widget.currentGuessList[2].country);
-            setState(() {
-              radioItem = val;
-            });
+            // setState(() {
+            //   radioItem = val;
+            // });
           },
         ),
-        Text(
-          '$radioItem',
-          style: TextStyle(fontSize: 23),
-        )
+        // Text(
+        //   '$radioItem',
+        //   style: TextStyle(fontSize: 23),
+        // )
       ],
     );
   }

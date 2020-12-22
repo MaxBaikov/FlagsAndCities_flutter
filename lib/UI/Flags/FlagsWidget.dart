@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,10 +21,11 @@ class FlagsWidget extends StatefulWidget {
 
 class _FlagsWidgetState extends State<FlagsWidget> {
   static const numberOfAnswers = 3;
-  var currentGuessList = List<Entry>(numberOfAnswers);
+  var currentGuessList = List<Entry>();
   var rightAnswer;
   var answer;
   var check;
+  var _answerOpasity = 0.0;
 
   @override
   void initState() {
@@ -65,6 +68,13 @@ class _FlagsWidgetState extends State<FlagsWidget> {
                   answer: answer,
                   setAnswer: setAnswer),
             ),
+            Opacity(
+              opacity: _answerOpasity,
+              child: Text(
+                '$check',
+                style: TextStyle(fontSize: 23),
+              ),
+            ),
             Container(
               child: RaisedButton(
                 color: Colors.blue,
@@ -73,25 +83,18 @@ class _FlagsWidgetState extends State<FlagsWidget> {
                 onPressed: checkAnswer,
               ),
             ),
-            Text(
-              '$check',
-              style: TextStyle(fontSize: 23),
-            )
           ]),
     );
   }
 
   checkAnswer() {
-    var val;
-    var a = answer;
-    var b = currentGuessList[rightAnswer].country;
     if (answer == currentGuessList[rightAnswer].country) {
-      val = 'ПРАВИЛЬНО';
+      check = 'ПРАВИЛЬНО';
     } else {
-      val = 'НЕ ПРАВИЛЬНО';
+      check = 'НЕ ПРАВИЛЬНО';
     }
     setState(() {
-      check = val;
+      _answerOpasity = 1.0;
     });
   }
 
@@ -101,16 +104,13 @@ class _FlagsWidgetState extends State<FlagsWidget> {
     });
   }
 
-//TODO проверить - генерит повторяющиеся элементы
   generateNewGuessList() {
-    // currentGuessList.clear();
-    int i = 0;
-    while (i < numberOfAnswers) {
-      var next =
-          Countries().countries[Random().nextInt(Countries().countries.length)];
-      if (currentGuessList.contains(next)) continue;
-      currentGuessList[i] = next;
-      i++;
+    Set<int> generated = new HashSet<int>();
+    while (generated.length < numberOfAnswers) {
+      generated.add(Random().nextInt(Countries().countries.length));
+    }
+    for (var i in generated) {
+      currentGuessList.add(Countries().countries[i]);
     }
   }
 
